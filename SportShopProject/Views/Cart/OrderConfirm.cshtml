@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Оформление заказа";
+    Layout = "~/Views/Shared/_TitleLayout.cshtml";
+}
+
+@using (Html.BeginForm("OrderFinish", "Cart"))
+{
+    <h4>Общая сумма заказа @ViewBag.Sum руб. (Стоимость доставки не включена)</h4>
+    <input class="btn btn-default" type="submit" value="Подтвердить заказ" />
+}
+

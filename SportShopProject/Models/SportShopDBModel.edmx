@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SportShopDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SportShopDBModelStoreContainer">
+    <EntitySet Name="Products" EntityType="SportShopDBModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clients" EntityType="SportShopDBModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderedProducts" EntityType="SportShopDBModel.Store.OrderedProducts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="SportShopDBModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="SportShopDBModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Bike" EntityType="SportShopDBModel.Store.Products_Bike" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Clothes" EntityType="SportShopDBModel.Store.Products_Clothes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Shoes" EntityType="SportShopDBModel.Store.Products_Shoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_Sneakers" EntityType="SportShopDBModel.Store.Products_Sneakers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ClientOrder" Association="SportShopDBModel.Store.ClientOrder">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderedProduct" Association="SportShopDBModel.Store.OrderOrderedProduct">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderedProduct" EntitySet="OrderedProducts" />
+    </AssociationSet>
+    <AssociationSet Name="ProductOrderedProduct" Association="SportShopDBModel.Store.ProductOrderedProduct">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderedProduct" EntitySet="OrderedProducts" />
+    </AssociationSet>
+    <AssociationSet Name="CategoryProduct" Association="SportShopDBModel.Store.CategoryProduct">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bike_inherits_Product" Association="SportShopDBModel.Store.FK_Bike_inherits_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Bike" EntitySet="Products_Bike" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clothes_inherits_Product" Association="SportShopDBModel.Store.FK_Clothes_inherits_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Clothes" EntitySet="Products_Clothes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shoes_inherits_Product" Association="SportShopDBModel.Store.FK_Shoes_inherits_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Shoes" EntitySet="Products_Shoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sneakers_inherits_Shoes" Association="SportShopDBModel.Store.FK_Sneakers_inherits_Shoes">
+      <End Role="Shoes" EntitySet="Products_Shoes" />
+      <End Role="Sneakers" EntitySet="Products_Sneakers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="true" />
+    <Property Name="Vendor" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="CategoryId" Type="int" Nullable="true" />
+    <Property Name="Article" Type="nvarchar" Nullable="true" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Age" Type="int" Nullable="true" />
+    <Property Name="Gender" Type="int" Nullable="true" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="OrderedProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientId" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="int" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products_Bike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Material" Type="int" Nullable="false" />
+    <Property Name="MaxWeight" Type="int" Nullable="false" />
+    <Property Name="SpeedsCount" Type="int" Nullable="false" DefaultValue="1" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products_Clothes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Sizes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Colors" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products_Shoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Sizes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Colors" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products_Sneakers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ClientOrder">
+    <End Role="Client" Type="SportShopDBModel.Store.Clients" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Order" Type="SportShopDBModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderedProduct">
+    <End Role="Order" Type="SportShopDBModel.Store.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderedProduct" Type="SportShopDBModel.Store.OrderedProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderedProduct">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductOrderedProduct">
+    <End Role="Product" Type="SportShopDBModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderedProduct" Type="SportShopDBModel.Store.OrderedProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderedProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoryProduct">
+    <End Role="Category" Type="SportShopDBModel.Store.Categories" Multiplicity="0..1" />
+    <End Role="Product" Type="SportShopDBModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bike_inherits_Product">
+    <End Role="Product" Type="SportShopDBModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bike" Type="SportShopDBModel.Store.Products_Bike" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bike">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clothes_inherits_Product">
+    <End Role="Product" Type="SportShopDBModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Clothes" Type="SportShopDBModel.Store.Products_Clothes" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clothes">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shoes_inherits_Product">
+    <End Role="Product" Type="SportShopDBModel.Store.Products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Shoes" Type="SportShopDBModel.Store.Products_Shoes" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shoes">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sneakers_inherits_Shoes">
+    <End Role="Shoes" Type="SportShopDBModel.Store.Products_Shoes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sneakers" Type="SportShopDBModel.Store.Products_Sneakers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shoes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sneakers">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SportShopDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SportShopDBEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Products" EntityType="SportShopDBModel.Product" />
+          <EntitySet Name="Clients" EntityType="SportShopDBModel.Client" />
+          <EntitySet Name="OrderedProducts" EntityType="SportShopDBModel.OrderedProduct" />
+          <EntitySet Name="Orders" EntityType="SportShopDBModel.Order" />
+          <AssociationSet Name="ClientOrder" Association="SportShopDBModel.ClientOrder">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOrderedProduct" Association="SportShopDBModel.OrderOrderedProduct">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderedProduct" EntitySet="OrderedProducts" />
+          </AssociationSet>
+          <AssociationSet Name="ProductOrderedProduct" Association="SportShopDBModel.ProductOrderedProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderedProduct" EntitySet="OrderedProducts" />
+          </AssociationSet>
+          <EntitySet Name="Categories" EntityType="SportShopDBModel.Category" />
+          <AssociationSet Name="CategoryProduct" Association="SportShopDBModel.CategoryProduct">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product" Abstract="false">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" Unicode="true" MaxLength="30" />
+          <Property Name="Description" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="true" />
+          <NavigationProperty Name="OrderedProducts" Relationship="SportShopDBModel.ProductOrderedProduct" FromRole="Product" ToRole="OrderedProduct" />
+          <Property Name="Vendor" Type="String" Nullable="true" Unicode="true" MaxLength="20" />
+          <NavigationProperty Name="Category" Relationship="SportShopDBModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="true" />
+          <Property Name="Article" Type="String" Nullable="true" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Bike" BaseType="SportShopDBModel.Product" >
+          <Property Name="Material" Type="SportShopDBModel.Materials" Nullable="false" />
+          <Property Name="MaxWeight" Type="Int32" Nullable="false" />
+          <Property Name="SpeedsCount" Type="Int32" Nullable="false" DefaultValue="1" />
+        </EntityType>
+        <EntityType Name="Clothes" BaseType="SportShopDBModel.Product" >
+          <Property Name="Sizes" Type="String" Nullable="true" />
+          <Property Name="Colors" Type="String" Nullable="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="true" />
+          <Property Name="LastName" Type="String" Nullable="true" />
+          <Property Name="Age" Type="Int32" Nullable="true" />
+          <Property Name="Gender" Type="SportShopDBModel.Gender" Nullable="true" />
+          <NavigationProperty Name="Orders" Relationship="SportShopDBModel.ClientOrder" FromRole="Client" ToRole="Order" />
+          <Property Name="Mail" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="true" />
+          <Property Name="UserName" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="OrderedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Order" Relationship="SportShopDBModel.OrderOrderedProduct" FromRole="OrderedProduct" ToRole="Order" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="SportShopDBModel.ProductOrderedProduct" FromRole="OrderedProduct" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" DefaultValue="1" />
+          <Property Name="Note" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Client" Relationship="SportShopDBModel.ClientOrder" FromRole="Order" ToRole="Client" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderedProducts" Relationship="SportShopDBModel.OrderOrderedProduct" FromRole="Order" ToRole="OrderedProduct" />
+          <Property Name="Discount" Type="Int32" Nullable="false" DefaultValue="0" />
+        </EntityType>
+        <Association Name="ClientOrder">
+          <End Type="SportShopDBModel.Client" Role="Client" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SportShopDBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderOrderedProduct">
+          <End Type="SportShopDBModel.Order" Role="Order" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SportShopDBModel.OrderedProduct" Role="OrderedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderedProduct">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductOrderedProduct">
+          <End Type="SportShopDBModel.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SportShopDBModel.OrderedProduct" Role="OrderedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderedProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Shoes" BaseType="SportShopDBModel.Product" >
+          <Property Name="Sizes" Type="String" Nullable="true" />
+          <Property Name="Colors" Type="String" Nullable="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sneakers" BaseType="SportShopDBModel.Shoes" >
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="SportShopDBModel.CategoryProduct" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <Association Name="CategoryProduct">
+          <End Type="SportShopDBModel.Category" Role="Category" Multiplicity="0..1" >
+          </End>
+          <End Type="SportShopDBModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="Materials">
+          <Member Name="Сталь" />
+          <Member Name="Алюминий" />
+        </EnumType>
+        <EnumType Name="Gender">
+          <Member Name="Мужчина" />
+          <Member Name="Женщина" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SportShopDBModelStoreContainer" CdmEntityContainer="SportShopDBEntity">
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Article" ColumnName="Article" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Bike)">
+        <MappingFragment StoreEntitySet="Products_Bike">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Material" ColumnName="Material" />
+          <ScalarProperty Name="MaxWeight" ColumnName="MaxWeight" />
+          <ScalarProperty Name="SpeedsCount" ColumnName="SpeedsCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Clothes)">
+        <MappingFragment StoreEntitySet="Products_Clothes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sizes" ColumnName="Sizes" />
+          <ScalarProperty Name="Colors" ColumnName="Colors" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Shoes)">
+        <MappingFragment StoreEntitySet="Products_Shoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sizes" ColumnName="Sizes" />
+          <ScalarProperty Name="Colors" ColumnName="Colors" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Sneakers)">
+        <MappingFragment StoreEntitySet="Products_Sneakers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Client)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderedProducts">
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.OrderedProduct)">
+        <MappingFragment StoreEntitySet="OrderedProducts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(SportShopDBModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

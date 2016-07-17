@@ -1,0 +1,45 @@
+﻿@model CartViewModel
+
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+    var productList = Model.OrderedProducts.ToList();
+}
+
+<div class="cartView">
+    @if (Model.OrderedProducts.Count > 0)
+    {
+        using (Html.BeginForm("ApplyCart", "Cart"))
+        {
+            for (int i = 0; i < Model.OrderedProducts.Count; i++)
+            {
+                var product = productList[i];
+                <div class="horizontal fullWidth">
+                    <ul>
+                        <li>
+                            <span class="leftColumn">@(Html.ProductType(product.Product) + product.Product.Title)</span>
+                            <span class="rightColumn rightAlign countInput">
+                                <p>@($"{product.Product.Price} руб. x ")</p>
+                                <!--@Html.TextBox($"OrderedProducts[{i}].Count.", Model.OrderedProducts[i].Count)-->
+                                @Html.EditorFor(x => x.OrderedProducts[i].Count, new { htmlAttributes = new { autocomplete="off", type = "number", min = "1", step = "1" } })
+                                @Html.ActionLink("x", "RemoveFromCart", new { article = Model.OrderedProducts[i].Product.Article },new {  @class="btn btn-default noMargin btn-removeFromCart" })
+                                <!--<p>@($" = {product.Product.Price * product.Count} руб.")</p>-->
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                @Html.HiddenFor(x => x.OrderedProducts[i].Product.Id)
+            }
+            if (Session["LastCatalogPage"] != null)
+            {
+                //@Html.ActionLink("Продолжить покупки","ProductView","Product",new { article = (string)Session["LastCatalogPage"] }, new { @class="btn btn-default" });
+                <a class="btn btn-default" href="@Session["LastCatalogPage"]">Продолжить покупки</a>
+            }
+            <input class="btn btn-default noMargin" type="submit" value="Оформить заказ" />
+        }
+    }
+    else
+    {
+        <h2>Корзина пуста</h2>
+    }
+</div>

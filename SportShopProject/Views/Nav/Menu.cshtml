@@ -1,0 +1,7 @@
+﻿@model List<string>
+<ul id="category_list">
+    @foreach (var categoryTitle in Model)
+    {
+        <li class="@(categoryTitle == ViewBag.SelectedCategory ? "active" : null)" >@Html.RouteLink(categoryTitle, new { controller = "Product", action = "ProductList", category = categoryTitle.Replace(' ','_') })</li>
+    }
+</ul>

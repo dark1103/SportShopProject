@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Оформление заказа";
+    Layout = "~/Views/Shared/_TitleLayout.cshtml";
+}
+
+<h4>Заказ отправлен.</h4>
+<p>Наш сотрудник свяжется с вами в ближайшее время для уточнения деталей.</p>
+@if (Session["LastCatalogPage"] != null)
+{
+    <a class="btn btn-default" href="@Session["LastCatalogPage"]">Продолжить покупки</a>
+}
+else
+{
+    @Html.ActionLink("Продолжить покупки", "Index", "Product", null, new { @class = "btn btn-default" })
+}

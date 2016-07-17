@@ -1,0 +1,28 @@
+﻿@model CategoryViewModel
+
+@{
+    ViewBag.Title = "Каталог";
+    ViewData["Category"] = Model.pageInfo.category;
+    Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+}
+
+
+<div class="container_products">
+    @{
+        foreach (var p in Model.Products)
+        {
+            <div class="product">   
+                <a href="@Url.Action("ProductView","Product",new { article=p.Article })">
+                    <div class="imageFrame">
+                        <img src="@Url.Content("~/Images/Products/" + p.Article + "_Main.jpg")" />
+                    </div>
+                </a>
+                <a href="@Url.Action("ProductView","Product",new { article=p.Article })">
+                    <h2>@(Html.ProductType(p) + p.Title)</h2>
+                </a>
+                <p class="price">@p.Price руб.</p>
+            </div>
+        }
+    }
+</div>
+@Html.Action("PagesLinks", "Nav", new { page = Model.pageInfo.page, pageCount = Model.pageInfo.pagesCount, category = Model.pageInfo.category })

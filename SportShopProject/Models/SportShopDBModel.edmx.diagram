@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="140e356837dd4defac192fb942a94cdb" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="SportShopDBModel.Product" Width="1.5" PointX="5.625" PointY="1.125" />
+        <EntityTypeShape EntityType="SportShopDBModel.Bike" Width="1.5" PointX="4" PointY="0.5" />
+        <InheritanceConnector EntityType="SportShopDBModel.Bike" />
+        <EntityTypeShape EntityType="SportShopDBModel.Clothes" Width="1.5" PointX="1.5" PointY="2" />
+        <InheritanceConnector EntityType="SportShopDBModel.Clothes" />
+        <EntityTypeShape EntityType="SportShopDBModel.Client" Width="1.5" PointX="7.5" PointY="0.5" FillColor="Lime" />
+        <EntityTypeShape EntityType="SportShopDBModel.OrderedProduct" Width="1.5" PointX="7.5" PointY="3.5" FillColor="Lime" />
+        <EntityTypeShape EntityType="SportShopDBModel.Order" Width="1.5" PointX="9.375" PointY="2.5" FillColor="Lime" />
+        <AssociationConnector Association="SportShopDBModel.ClientOrder" />
+        <AssociationConnector Association="SportShopDBModel.OrderOrderedProduct" />
+        <AssociationConnector Association="SportShopDBModel.ProductOrderedProduct" />
+        <EntityTypeShape EntityType="SportShopDBModel.Shoes" Width="1.5" PointX="4" PointY="3.125" />
+        <InheritanceConnector EntityType="SportShopDBModel.Shoes" />
+        <EntityTypeShape EntityType="SportShopDBModel.Sneakers" Width="1.5" PointX="2" PointY="4.25" />
+        <InheritanceConnector EntityType="SportShopDBModel.Sneakers" />
+        <EntityTypeShape EntityType="SportShopDBModel.Category" Width="1.5" PointX="5.625" PointY="4.25" />
+        <AssociationConnector Association="SportShopDBModel.CategoryProduct" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

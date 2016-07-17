@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_TitleLayout.cshtml";
+}
+
+<div id="menu">
+    @Html.Action("Menu", "Nav", ViewData.ContainsKey("Category") ? new { selectedCategory = Model.pageInfo.category } : null)
+</div>
+<div id="content">
+    @RenderBody()
+</div>

@@ -1,0 +1,31 @@
+﻿@model CategoryViewModel
+
+@{
+    SportShopProject.Models.Product product = Model.Products.FirstOrDefault();
+    ViewBag.Title = Html.ProductType(product) + product.Title;
+    Layout = "~/Views/Shared/_CatalogLayout.cshtml";
+}
+
+<div class="productView">
+    <div class="horizontal imageBorder">
+        <img src="@Url.Content("~/Images/Products/" + product.Article + "_Main.jpg")" />
+    </div>
+    <div class="horizontal addToCartView">
+        <p class="price">@product.Price руб.</p>
+        @using (Html.BeginForm("AddToCart", "Cart", new { article = product.Article, returnUrl = Request.Url.PathAndQuery }, FormMethod.Post))
+        {
+            <input class="btn btn-default" type="submit" value="Добавить в корзину" />
+        }
+    </div>
+    <br />
+    <div class="descriptionView horizontal fullWidth">
+        <div tabindex="10" class="testClass">
+            @product.Description
+        </div>
+    </div>
+    <br />
+    <div class="properyView horizontal fullWidth">
+        <h3>Характеристики</h3>
+        @Html.GetProperties(product)
+    </div>
+</div>
